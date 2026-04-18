@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logic + Visual</title>
+    <style>
+        body { background: #000000; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; overflow: hidden; color: white; font-family: sans-serif; }
+        #canvas { border: 2px solid #797979; background: #000; cursor: crosshair; }
+        .controls { margin-bottom: 10px; }
+        button { padding: 10px 20px; cursor: pointer; background: #00ff88; border: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="controls">
+        <button onclick="spawnCircles()">Запустить алгоритм</button>
+    </div>
+    <canvas id="canvas" width="600" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        function spawnCircles() {
+            // Вот здесь начинается ЛОГИКА
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * canvas.width;
+                    const y = Math.random() * canvas.height;
+                    const radius = Math.random() * 30 + 5;
+                    const color = `hsl(${Math.random() * 360}, 70%, 50%)`;
+
+                    drawCircle(x, y, radius, color);
+                }, i * 50); // Алгоритм появления с задержкой
+            }
+        }
+
+        function drawCircle(x, y, r, color) {
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.closePath();
+        }
+    </script>
+</body>
+</html>
